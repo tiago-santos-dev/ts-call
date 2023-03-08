@@ -1,3 +1,4 @@
+import maskImage from '@/assets/mask.png';
 import { Heading, styled, Text } from "@ignite-ui/react";
 
 export const Container = styled('div', {
@@ -9,37 +10,28 @@ export const Container = styled('div', {
   height: '100vh',
 });
 
-export const HeadingContainer = styled('div', {
+export const Hero = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
   justifyContent: 'center',
-  height: '100%',
-  position: 'absolute',
+  maxWidth: '680px',
+  height: '680px',
+  padding: '0 $10',
 
-  [`${Heading}`]: {
-    zIndex: 1,
+  backgroundImage: `url(${maskImage.src})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+
+  [`> ${Heading}`]: {
     '@media(max-width: 600px)': {
       fontSize: '$6xl',
     },
   },
 
-  [`${Text}`]: {
-    zIndex: 1,
+  [`> ${Text}`]: {
     marginTop: '$2',
     color: '$gray200',
-  },
-})
-
-export const Hero = styled('div', {
-  maxWidth: '480px',
-  height: '580px',
-  padding: '0 $10',
-  position: 'relative',
-
-  '.mask-image': {
-    position: 'relative',
-    height: '100%',
   },
 });
 
