@@ -1,3 +1,4 @@
+import { api } from "@/lib/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Heading, MultiStep, Text, TextInput } from "@ignite-ui/react";
 import { useRouter } from "next/router";
@@ -36,7 +37,14 @@ export default function Register() {
   }, [router.query?.username])
 
   async function handleRegister(data: RegisterFormData) {
+    try {
+      await api.post('/users', {
+        username: data.username,
+        name: data.name
+      })
+    } catch (error) {
 
+    }
   }
 
   return (
