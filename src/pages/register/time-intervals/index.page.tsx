@@ -1,3 +1,4 @@
+import { api } from "@/lib/axios";
 import { convertTimeStringToMinutes } from "@/utils /convert-time-string-to-minutes";
 import { getWeekDays } from "@/utils /get-week-days";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,7 +31,7 @@ const timeIntervalsFormSchema = z.object({
     }))
     .refine((intervals) => {
       return intervals.every(interval => {
-        return interval.endTimeInMinutes - 60 <= interval.startTimeInMinutes
+        return interval.endTimeInMinutes - 60 >= interval.startTimeInMinutes
       })
     }, {
       message: 'O horário de término deve ser pelo menos 1h distante do horário de início',
@@ -73,9 +74,11 @@ export default function TimeIntervals() {
 
   const weekDays = getWeekDays()
   async function handleSetTimeIntervals(data: any) {
-    const formData = data as TimeIntervalsFormOutput;
-    console.log("🚀 ~ file: index.page.tsx:77 ~ handleSetTimeIntervals ~ data:", data)
+    const { intervals } = data as TimeIntervalsFormOutput;
 
+    await api.post('/users/time-intervals', {
+      intervals
+    });
   }
 
   return (
