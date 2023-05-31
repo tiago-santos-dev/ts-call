@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "utils/get-week-days",
-    "schedule-form/calendar"
+    "schedule-form/calendar",
+    "confirm-step"
   ]
 }
